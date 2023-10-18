@@ -72,7 +72,7 @@ echo "platform connect connect://${device_id}:${PORT_NUM}" >> ${launch_file}
 echo "process attach -p ${TARGET_PID}" >> ${launch_file}
 current_path=$(pwd)
 # 这一句衔接在attach后面不会生效，需要研究下......
-echo "add-dsym ${current_path}/src/out/android_debug_unopt/libflutter.so" >> launch.sh
+echo "add-dsym ${current_path}/src/out/android_debug_unopt/libflutter.so" >> ${launch_file}
 # from terminal
 # lldb -s temp
 echo "--->Try Kill in this place"
