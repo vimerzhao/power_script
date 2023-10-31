@@ -67,12 +67,15 @@ fi
 #        这里利用 temp 文件传递了这些信息
 launch_file=${gen}/launch.sh
 device_id=$(adb devices | head -2 |tail -1 | cut -f 1)
-echo "platform select remote-android" > ${launch_file}
+echo "--->device id: ${device_id}"
+echo "version" > ${launch_file}
+echo "platform select remote-android" >> ${launch_file}
 echo "platform connect connect://${device_id}:${PORT_NUM}" >> ${launch_file}
 echo "process attach -p ${TARGET_PID}" >> ${launch_file}
 current_path=$(pwd)
 # 这一句衔接在attach后面不会生效，需要研究下......
-echo "add-dsym ${current_path}/src/out/android_debug_unopt/libflutter.so" >> ${launch_file}
+echo "add-dsym ${current_path}/src/out/android_debug_unopt_arm64/libflutter.so" >> ${launch_file}
 # from terminal
-# lldb -s temp
+#/data/research/llvm-project/.build/bin/lldb -s ${launch_file}
+#/root/.install/android-sdk-linux/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/bin/lldb  -s ${launch_file}
 echo "--->Try Kill in this place"
